@@ -1,28 +1,341 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css" integrity="sha512-3M00D/rn8n+2ZVXBO9Hib0GKNpkm8MSUU/e2VNthDyBYxKWG+BftNYYcuEjXlyrSO637tidzMBXfE7sQm0INUg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
-    <title>Stopwatch</title>
-</head>
-<body>
-    <div class="main">
-        <div class="stopwatch-body">
-            <div class="stopwatch-inner-body">
-                <span id="hour"></span><span id="minutes"></span><span id="seconds"></span><sup><span id="milliseconds"></span></sup>
-            </div>
-        </div>
-        <div class="btn-container">
-        <button id="stop">Stop</button><button id="start">Start</button><button id="reset">Reset</button>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Afacad:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="images/ppp.png" />
+    <title>Eridanus</title>
+    <style>
+      body {
+        font-family: "Afacad", sans-serif;
+        background-color: #212129;
+        margin: 0;
+        color: #ecf0f1;
+        font-size: 0.8rem;
+      }
+
+      table {
+        width: 93%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: rgb(52, 50, 58);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      }
+
+      th,
+      td {
+        border: 1px solid #ededed;
+        padding: 10px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #564f9c;
+        color: #fff;
+        font-weight: bold;
+      }
+
+      tr:nth-child(even) {
+        background-color: rgb(42, 40, 47);
+      }
+
+      .sT tr:nth-child(1) {
+        background-color: rgb(212, 198, 238);
+        color: #212129;
+      }
+
+      .sT tr:nth-child(2) {
+        background-color: rgb(193, 181, 217);
+        color: #212129;
+      }
+
+      .sT tr:nth-child(3) {
+        background-color: rgb(171, 161, 193);
+        color: #212129;
+      }
+
+      .sT tr:nth-child(4) {
+        background-color: rgb(149, 140, 168);
+        color: #212129;
+      }
+
+      .sT tr:nth-child(5) {
+        background-color: rgb(127, 119, 143);
+        color: #212129;
+      }
+
+      tr:hover {
+        background-color: hsl(258, 12%, 34%);
+      }
+
+      .sT tr:hover {
+        background-color: hsla(255, 100%, 64%, 0.25);
+        color: rgb(255, 230, 0);
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin-left: 2rem;
+        margin-right: 2rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+        color: rgb(167, 137, 215);
+      }
+
+      h3 {
+        font-size: 1rem;
+        margin-bottom: -0.5rem;
+      }
+
+      p {
+        width: 90%;
+        padding-left: 2rem;
+      }
+
+      img {
+        width: 1.7rem;
+        margin-bottom: -6px;
+        margin-right: 5px;
+        margin-left: -7px;
+      }
+
+      .button {
+        font-size: 1rem;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        padding: 7px 12px;
+        height: 100%;
+        width: 93%;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+        background: hsl(258, 12%, 34%);
+        color: #fff;
+        font-weight: bold;
+      }
+
+      .button:hover {
+        background: hsl(257, 13%, 46%);
+      }
+
+      .BlockPick {
+        justify-content: space-evenly;
+        background-color: #31313a;
+        /* Choose your desired background color */
+        margin: 0rem;
+        padding: 15px;
+        padding-left: 25px;
+        padding-right: 25px;
+        gap: 15px;
+        text-align: center;
+        /* Center the items horizontally */
+        display: flex;
+        /* Create a flex container */
+        align-items: center;
+        box-shadow: 0 10px 12px #212129;
+        position: sticky;
+        top: 0;
+      }
+
+      .Block {
+        background-color: #31313a;
+        /* Choose your desired background color */
+        margin: 1.1rem;
+        margin-top: 1.5rem;
+        padding-bottom: 1px;
+        padding-top: 1px;
+        border-radius: 15px;
+      }
+
+      .Block h1 {
+        margin-left: 2rem;
+        margin-top: 12px;
+        margin-bottom: -7px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>ERIDANUS</h1>
+
+    <div class="BlockPick">
+      <a href="rules.html" class="button">History</a>
+
+      <a href="index.html" class="button">Stars</a>
+
+      <a href="placements.html" class="button">Questions</a>
+
     </div>
-    <script src="script.js"></script>
-</body>
+    <div class="Block">
+      <h1>STARS</h1>
+      <h2>Notes:</h2>
+      <h3>Bayer Designation: Greek (All)</h3>
+      <h3>
+        For Binary systems, magnitudes and coordinates are the avg of the two
+        objects.
+      </h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Star Type</th>
+            <th>Apparent Magnitude</th>
+            <th>Absolute Magnitude</th>
+            <th>Right Ascension</th>
+            <th>Declination</th>
+            <th>Distance (ly)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Group 1 - Games -->
+          <tr>
+            <td>α Eri (Achernar)</td>
+            <td>B3 Vpe + A1V-A3V</td>
+            <td>0.45</td>
+            <td>-2.77</td>
+            <td>01h 37m 42.84548s</td>
+            <td>–57° 14′ 12.3101″</td>
+            <td>139 ± 3 ly</td>
+          </tr>
+          <tr>
+            <td>β Eri</td>
+            <td>A3 III</td>
+            <td>2.78</td>
+            <td>0.6</td>
+            <td>05h 07m 50.98549s</td>
+            <td>−05° 05′ 11.2055″</td>
+            <td>90.0 ± 0.9 ly</td>
+          </tr>
+
+          <!-- Group 2 - Games -->
+          <tr>
+            <td>θ Eri</td>
+            <td>A3IV-V + A1V</td>
+            <td>2.88</td>
+            <td>-0.59</td>
+            <td>02h 58m 15.6764s</td>
+            <td>−40° 18′ 16.839″</td>
+            <td>164 ± 2 ly</td>
+          </tr>
+          <tr>
+            <td>γ Eri</td>
+            <td>M0III-IIIb</td>
+            <td>2.97</td>
+            <td>-1.19</td>
+            <td>03h 58m 01.76695s</td>
+            <td>−13° 30′ 30.6698″</td>
+            <td>192 ± 3 ly</td>
+          </tr>
+
+          <!-- Group 3 - Games -->
+          <tr>
+            <td>δ Eri</td>
+            <td>K0 IV</td>
+            <td>3.52</td>
+            <td>3.74</td>
+            <td>03h 43m 14.90088s</td>
+            <td>–09° 45′ 48.2084″</td>
+            <td>29.49 ± 0.08 ly</td>
+          </tr>
+          <tr>
+            <td>υ Eri</td>
+            <td>B8V + B9.5V</td>
+            <td>3.55</td>
+            <td>-0.14</td>
+            <td>04h 17m 53.66241s</td>
+            <td>−33° 47′ 54.0569″</td>
+            <td>178 ± 1 ly</td>
+          </tr>
+
+          <!-- Group 4 - Games -->
+          <tr>
+            <td>φ Eri</td>
+            <td>B8IV-V</td>
+            <td>3.56</td>
+            <td>0.18</td>
+            <td>02h 16m 30.58563s</td>
+            <td>−51° 30′ 43.7955″</td>
+            <td>153.7 ± 0.9 ly</td>
+          </tr>
+          <tr>
+            <td>χ Eri</td>
+            <td>G8IV</td>
+            <td>3.69</td>
+            <td>2.48</td>
+            <td>01h 55m 57.45606s</td>
+            <td>−51° 36′ 31.9736″</td>
+            <td>56.8 ± 0.3 ly</td>
+          </tr>
+
+          <!-- Group 5 - Games -->
+          <tr>
+            <td>τ Eri</td>
+            <td>M3/4 III</td>
+            <td>3.7</td>
+            <td>-0.79</td>
+            <td>03h 19m 31.00224s</td>
+            <td>−21° 45′ 28.3049″</td>
+            <td>307 ± 9 ly</td>
+          </tr>
+          <tr>
+            <td>ε Eri</td>
+            <td>K2V</td>
+            <td>3.72</td>
+            <td>6.18</td>
+            <td>03h 32m 55.84496s</td>
+            <td>−09° 27′ 29.7312″</td>
+            <td>10.475 ± 0.004 ly</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>Facts:</h2>
+      <h3>
+        α Eri - It is thought to have recently exhausted the hydrogen in its
+        core and begun to evolve away from the main sequence.
+      </h3>
+      <h3>β Eri - A particularly strong flare-up was reported in 1985.</h3>
+      <h3>
+        θ Eri - The system bore the traditional name Acamar, derived from the
+        Arabic آخِر النَّهْر Ākhir an-nahr, which means "the end of the river."
+      </h3>
+      <h3>
+        γ Eri - It has the traditional name Zaurak/Zaurac, which is one of the
+        Persian words for "boat".
+      </h3>
+      <h3>δ Eri - Low projected rotational velocity of under 1 km/s.</h3>
+      <h3>
+        υ Eri - The spin rate of the two stars is synchronized to their orbital
+        period. They are tidally locked.
+      </h3>
+      <h3>
+        φ Eri - Radiates 255 times the solar luminosity from its outer
+        atmosphere.
+      </h3>
+      <h3>
+        χ Eri - It shows a photometric variability of 0.04 in magnitude, which
+        may be due to a previous mass transfer from a secondary companion.
+      </h3>
+      <h3>τ Eri - Physical size of about 106 times the radius of the Sun.</h3>
+      <h3>
+        ε Eri - Periodic changes in Epsilon Eridani's radial velocity have
+        yielded evidence of a giant planet orbiting it.
+      </h3>
+      <br /><br />
+    </div>
+
+    <p>Last Updated: 11:30 PM (Dec 20)</p>
+  </body>
 </html>
